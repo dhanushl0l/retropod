@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <input type="file" id="file" accept="audio/*">
+  <br><br>
+  <button onclick="upload()">Upload</button>
+  <pre id="status"></pre>
+
+  <script>
+    async function upload() {
+      const file = document.getElementById('file').files[0];
+      if (!file) { alert('Pick a file first'); return; }
+
+      document.getElementById('status').textContent = 'Uploading...';
+
+      const res = await fetch('http://192.168.1.10:8080/update_media', {
+        method: 'POST',
+        headers: { 'Filename': file.name },
+        body: file
+      });
+
+      document.getElementById('status').textContent = 
+        res.ok ? 'Done: ' + res.status : 'Error: ' + res.status;
+    }
+  </script>
+</body>
+</html>

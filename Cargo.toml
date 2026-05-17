@@ -4,9 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-anyhow = "1.0"
-winit = { version = "0.30", features = ["android-native-activity"] }
-env_logger = "0.10"
-log = "0.4"
-wgpu = "28.0"
-pollster = "0.3"
+embedded-graphics = "0.8.2"
+rppal = { version = "0.22", features = ["embedded-hal"] }
+ssd1306 = "0.10.0"
+embedded-hal = "1.0"
+chrono = "0.4.44"
