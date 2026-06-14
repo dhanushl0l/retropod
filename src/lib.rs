@@ -7,6 +7,7 @@ use std::sync::LazyLock;
 pub mod audio;
 pub mod display;
 pub mod input;
+pub mod state;
 
 pub const APP_TITLE: &str = "retropod";
 

@@ -12,3 +12,6 @@ symphonia = { version = "0.6.0", features = ["all"] }
 cpal = "0.18.1"
 ringbuf = "0.5.0"
 rustfft = "6.4.1"
+
+[profile.release]
+panic = "abort"
