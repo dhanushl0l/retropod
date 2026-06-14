@@ -9,6 +9,7 @@ use ssd1306::mode::BufferedGraphicsMode;
 use ssd1306::prelude::I2CInterface;
 use ssd1306::size::DisplaySize128x64;
 
+use crate::audio::init::AudioControlEvent;
 use crate::input::ButtonEvent;
 use crate::{APP_TITLE, STYLE};
 
@@ -20,11 +21,12 @@ pub fn update_display(
         DisplaySize128x64,
         BufferedGraphicsMode<DisplaySize128x64>,
     >,
-    rx: mpsc::Receiver<ButtonEvent>,
+    button_rx: mpsc::Receiver<ButtonEvent>,
+    _audio_tx: mpsc::Sender<AudioControlEvent>,
 ) {
     let mut last_second = 0u64;
     loop {
-        let event = rx.recv_timeout(Duration::from_secs(1));
+        let event = button_rx.recv_timeout(Duration::from_secs(1));
         match event {
             Ok(ButtonEvent::Enter) => {
                 println!("enter")

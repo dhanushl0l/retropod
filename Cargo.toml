@@ -8,4 +8,7 @@ embedded-graphics = "0.8.2"
 rppal = { version = "0.22", features = ["embedded-hal"] }
 ssd1306 = "0.10.0"
 embedded-hal = "1.0"
-chrono = "0.4.44"
+symphonia = { version = "0.6.0", features = ["all"] }
+cpal = "0.18.1"
+ringbuf = "0.5.0"
+rustfft = "6.4.1"
