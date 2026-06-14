@@ -10,13 +10,16 @@ use super::player::PlaybackSession;
 
 pub fn audio_thread(audio_rx: Receiver<AudioControlEvent>, bins: Arc<Mutex<Vec<f32>>>) {
     let mut is_paused = false;
-    let mut player = None;
+    let mut player: Option<PlaybackSession> = None;
     loop {
-        while let Ok(event) = audio_rx.try_recv() {
+        while let Ok(event) = audio_rx.recv() {
             match event {
                 AudioControlEvent::Stop => return,
                 AudioControlEvent::Play(path) => {
                     if let Some(path) = path {
+                        if let Some(player) = player.take() {
+                            player.stop();
+                        }
                         player = match PlaybackSession::start(&path, bins.clone()) {
                             Ok(player) => {
                                 is_paused = false;
